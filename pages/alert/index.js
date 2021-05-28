@@ -1,0 +1,112 @@
+import React from 'react'
+
+const AlertIndexPage = () => {
+  function Statistic() {
+    return (
+      <div className='row justify-content-center p-2 m-1'>
+        <div className='col-6 p-2 border'>
+          <div className='row justify-content-center label-alert'>
+            All Alert
+          </div>
+          <div className='row justify-content-center label-alert-count'>
+            100
+          </div>
+        </div>
+        <div className='col-6 p-2 border'>
+          <div className='row justify-content-center label-alert'>
+            Alerted
+          </div>
+          <div className='row justify-content-center label-alert-count'>
+            30
+          </div>
+        </div>
+        <style jsx>{`
+          .label-alert {
+            font-size: 30px;
+          }
+          .label-alert-count {
+            font-size: 30px;
+          }
+      `}</style>
+      </div>
+    )
+  }
+
+  function CreateAlert() {
+    return (
+      <div className='row justify-content-center p-2 m-1 mt-3'>
+        <div className='row justify-content-start label-alert mb-1'>
+          Add Alert
+        </div>
+        <div className='input-group'>
+          <div className='col-12 col-md-4 my-1'>
+            <select className='form-select options-text' >
+              <option selected>Choose Product</option>
+              <option value='1'>Gold</option>
+              <option value='2'>Nasda100</option>
+              <option value='3'>BITCOIN</option>
+            </select>
+          </div>
+          <div className='col-12 col-md-4 my-1'>
+            <select className='form-select options-text' >
+              <option selected>Choose Operation</option>
+              <option value='1'>{'>='}</option>
+              <option value='2'>{'<='}</option>
+            </select>
+          </div>
+          <div className='col-12 col-md-4 my-1'>
+            <input type='text' className='form-control' placeholder='product price' />
+          </div>
+        </div>
+        <div className='mt-1 mt-md-2 d-grid gap-2'>
+          <button type='button' className='btn btn-outline-primary'>Submit</button>
+        </div>
+        <style jsx>{`
+          .options-text {
+            font-size: 16px;
+          }
+          .label-alert {
+            font-size: 30px;
+          }
+      `}</style>
+      </div>
+    )
+  }
+
+  function GenListAlert() {
+    return (
+      <div className='input-group my-1'>
+        <input type='text' className='form-control' placeholder='Message' disabled/>
+        <button className='btn btn-outline-danger' type='button'>x</button>
+      </div>
+    )
+  }
+
+  function ListAlert() {
+    return (
+      <div className='row justify-content-center p-2 m-1 mt-3'>
+        <div className='row justify-content-start label-list mb-1'>
+          List Alert
+        </div>
+        {GenListAlert()}
+        {GenListAlert()}
+        {GenListAlert()}
+        <style jsx>{`
+          .label-list {
+            font-size: 30px;
+          }
+      `}</style>
+      </div>
+    )
+  }
+
+  return (
+    <div className='container'>
+      {Statistic()}
+      {CreateAlert()}
+      {ListAlert()}
+    </div>
+  )
+}
+
+export default AlertIndexPage
