@@ -3,7 +3,7 @@ import React from 'react'
 const AlertIndexPage = () => {
   function Statistic() {
     return (
-      <div className='row justify-content-center p-2 m-1'>
+      <div className='row justify-content-center p-2 m-1 mt-3'>
         <div className='col-6 p-2 border'>
           <div className='row justify-content-center label-alert'>
             All Alert
@@ -88,6 +88,7 @@ const AlertIndexPage = () => {
         <div className='row justify-content-start label-list mb-1'>
           List Alert
         </div>
+        {GenListAlert()}
         {GenListAlert()}
         {GenListAlert()}
         {GenListAlert()}
