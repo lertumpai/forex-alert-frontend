@@ -109,6 +109,22 @@ const AlertIndexPage = () => {
     }
   }
 
+  async function getProductPrice(productId) {
+    try {
+      const response = await axios.get(
+        `${SERVER_URL}/products/price?productId=${productId}`
+        , {
+          withCredentials: true,
+          headers: {
+            'Access-Control-Allow-Origin': '*'
+          }
+        })
+      setPrice(response.data.price)
+    } catch (e) {
+      checkError(e)
+    }
+  }
+
   useEffect(async () => {
     await Promise.all([
       getUser(),
@@ -223,8 +239,9 @@ const AlertIndexPage = () => {
     return <option key={data.id} value={data.value}>{data.symbol}</option>
   }
 
-  function onProductChange(e) {
+  async function onProductChange(e) {
     setProductId(e.target.value)
+    await getProductPrice(e.target.value)
   }
 
   function onConditionChange(e) {
