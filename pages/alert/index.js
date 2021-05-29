@@ -1,6 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/router'
+import getConfig from 'next/config'
 import axios from 'axios'
+
+const { publicRuntimeConfig } = getConfig()
+const {
+  SERVER_URL,
+} = publicRuntimeConfig
 
 const AlertIndexPage = () => {
   const router = useRouter()
@@ -26,7 +32,7 @@ const AlertIndexPage = () => {
   async function getUser() {
     try {
       const response = await axios.get(
-        'http://localhost:5000/users/'
+        `${SERVER_URL}/users/`
         , {
           withCredentials: true,
           headers: {
@@ -42,7 +48,7 @@ const AlertIndexPage = () => {
   async function getCount() {
     try {
       const response = await axios.get(
-        'http://localhost:5000/alerts/count_alert/'
+        `${SERVER_URL}/alerts/count_alert/`
         , {
           withCredentials: true,
           headers: {
@@ -58,7 +64,7 @@ const AlertIndexPage = () => {
   async function getConditions() {
     try {
       const response = await axios.get(
-        'http://localhost:5000/alerts/conditions/'
+        `${SERVER_URL}/alerts/conditions/`
         , {
           withCredentials: true,
           headers: {
@@ -74,7 +80,7 @@ const AlertIndexPage = () => {
   async function getProducts() {
     try {
       const response = await axios.get(
-        'http://localhost:5000/products/'
+        `${SERVER_URL}/products/`
         , {
           withCredentials: true,
           headers: {
@@ -90,7 +96,7 @@ const AlertIndexPage = () => {
   async function getAlerts() {
     try {
       const response = await axios.get(
-        'http://localhost:5000/alerts/'
+        `${SERVER_URL}/alerts/`
         , {
           withCredentials: true,
           headers: {
@@ -155,7 +161,7 @@ const AlertIndexPage = () => {
   async function onSubmitSetUser() {
     try {
       const response = await axios.patch(
-        'http://localhost:5000/users/',
+        `${SERVER_URL}/users/`,
         {
           line_access_token: user.line_access_token,
           line_user_id: user.line_user_id,
@@ -235,7 +241,7 @@ const AlertIndexPage = () => {
         return
       }
       await axios.post(
-        'http://localhost:5000/alerts',
+        `${SERVER_URL}/alerts`,
         {
           price,
           condition,
@@ -306,7 +312,7 @@ const AlertIndexPage = () => {
     return async () => {
       try {
         await axios.delete(
-          `http://localhost:5000/alerts/${id}`,
+          `${SERVER_URL}/alerts/${id}`,
           {
             withCredentials: true,
             headers: {

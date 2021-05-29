@@ -1,6 +1,12 @@
 import React, { useState } from 'react'
+import getConfig from 'next/config'
 import { useRouter } from 'next/router'
 import axios from 'axios'
+
+const { publicRuntimeConfig } = getConfig()
+const {
+  SERVER_URL,
+} = publicRuntimeConfig
 
 const IndexPage = () => {
   const router = useRouter()
@@ -19,7 +25,7 @@ const IndexPage = () => {
   async function onLogin() {
     try {
       const response = await axios.post(
-        'http://localhost:5000/users/login',
+        `${SERVER_URL}/users/login`,
         {
         username,
         password,
