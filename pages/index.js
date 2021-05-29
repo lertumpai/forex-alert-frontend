@@ -6,6 +6,7 @@ const IndexPage = () => {
   const router = useRouter()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
 
   function onUsernameChange(e) {
     setUsername(e.target.value)
@@ -33,7 +34,7 @@ const IndexPage = () => {
         router.push('/alert')
       }
     } catch (error) {
-      console.error(error)
+      setError('Username or Password is incorrect')
     }
   }
 
@@ -42,6 +43,9 @@ const IndexPage = () => {
       <div className='row justify-content-center p-3'>
         <div className='col-12 col-md-10 col-lg-8 col-xl-6 border border-2 rounded-3'>
           <div className='p-3'>
+            <div className='error-text'>
+              {error}
+            </div>
             <div className='my-2'>
               <label htmlFor='form-username' className='form-label'>Username</label>
               <input type='text' className='form-control' id='form-username' value={username} onChange={onUsernameChange} />
@@ -56,6 +60,11 @@ const IndexPage = () => {
           </div>
         </div>
       </div>
+      <style jsx>{`
+          .error-text {
+            color: red;
+          }
+      `}</style>
     </div>
   )
 }
