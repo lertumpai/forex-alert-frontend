@@ -4,7 +4,7 @@ import axios from 'axios'
 
 const AlertIndexPage = () => {
   const router = useRouter()
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({ line_access_token: '', line_user_id: '' })
   const [count, setCount] = useState({ countAll: 0, countAlert: 0, countNotAlert: 0 })
 
   // for create alert
@@ -166,6 +166,7 @@ const AlertIndexPage = () => {
           }
         })
       setUser(response.data)
+      router.reload()
     } catch (error) {
       checkError(error)
     }
@@ -282,7 +283,11 @@ const AlertIndexPage = () => {
             </div>
           </div>
           <div className='mt-1 mt-md-2 d-grid gap-2'>
-            <button type='button' className='btn btn-outline-primary' onClick={onSubmitAlert}>Submit</button>
+            {
+              user.line_user_id && user.line_access_token
+                ? <button type='button' className='btn btn-outline-primary' onClick={onSubmitAlert} >Submit</button>
+                : <button type='button' className='btn btn-outline-primary' onClick={onSubmitAlert} disabled>Submit</button>
+            }
           </div>
         </div>
         <style jsx>{`
@@ -318,7 +323,6 @@ const AlertIndexPage = () => {
   function GenListAlert(data) {
     return (
       <div key={data.id} className='input-group my-1'>
-        {/*<input type='text' className='form-control' placeholder='Message' disabled/>*/}
         <h3 className='alert-container border border-primary form-control'>{`${data.productName} ${data.condition} ${data.price}`}</h3>
         <button className='btn btn-outline-danger alert-container' type='button' onClick={onDeleteAlert(data.id)}>x</button>
         <style jsx>{`
