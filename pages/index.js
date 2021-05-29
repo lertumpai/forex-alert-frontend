@@ -1,6 +1,42 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useRouter } from 'next/router'
+import axios from 'axios'
 
 const IndexPage = () => {
+  const router = useRouter()
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+
+  function onUsernameChange(e) {
+    setUsername(e.target.value)
+  }
+
+  function onPasswordChange(e) {
+    setPassword(e.target.value)
+  }
+
+  async function onLogin() {
+    try {
+      const response = await axios.post(
+        'http://localhost:5000/users/login',
+        {
+        username,
+        password,
+      }, {
+          withCredentials: true,
+          headers: {
+            'Access-Control-Allow-Origin': '*'
+          }
+        })
+
+      if (response.status === 200) {
+        router.push('/alert')
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return (
     <div className='container'>
       <div className='row justify-content-center p-3'>
@@ -8,14 +44,14 @@ const IndexPage = () => {
           <div className='p-3'>
             <div className='my-2'>
               <label htmlFor='form-username' className='form-label'>Username</label>
-              <input type='text' className='form-control' id='form-username' />
+              <input type='text' className='form-control' id='form-username' value={username} onChange={onUsernameChange} />
             </div>
             <div className='my-2'>
               <label htmlFor='form-password' className='form-label'>Password</label>
-              <input type='password' className='form-control' id='form-password' />
+              <input type='password' className='form-control' id='form-password' value={password} onChange={onPasswordChange} />
             </div>
             <div className='mt-4 mb-2 d-grid gap-2'>
-              <button type='button' className='btn btn-outline-primary'>Login</button>
+              <button type='button' className='btn btn-outline-primary' onClick={onLogin}>Login</button>
             </div>
           </div>
         </div>

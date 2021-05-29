@@ -85,7 +85,7 @@ const AlertIndexPage = () => {
           <div className='input-group'>
             <div className='col-12 col-md-4 my-1'>
               <select className='form-select options-text' >
-                <option selected>Choose Product</option>
+                <option value='DEFAULT'>Choose Product</option>
                 <option value='1'>Gold</option>
                 <option value='2'>Nasda100</option>
                 <option value='3'>BITCOIN</option>
@@ -93,7 +93,7 @@ const AlertIndexPage = () => {
             </div>
             <div className='col-12 col-md-4 my-1'>
               <select className='form-select options-text' >
-                <option selected>Choose Operation</option>
+                <option value='DEFAULT'>Choose Operation</option>
                 <option value='1'>{'>='}</option>
                 <option value='2'>{'<='}</option>
               </select>
