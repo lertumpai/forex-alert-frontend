@@ -121,8 +121,14 @@ const AlertIndexPage = () => {
   function GenListAlert() {
     return (
       <div className='input-group my-1'>
-        <input type='text' className='form-control' placeholder='Message' disabled/>
-        <button className='btn btn-outline-danger' type='button'>x</button>
+        {/*<input type='text' className='form-control' placeholder='Message' disabled/>*/}
+        <h3 className='alert-container border border-primary form-control'>a</h3>
+        <button className='btn btn-outline-danger alert-container' type='button'>x</button>
+        <style jsx>{`
+          .alert-container {
+            height: 90%;
+          }
+      `}</style>
       </div>
     )
   }
