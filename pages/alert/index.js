@@ -32,6 +32,35 @@ const AlertIndexPage = () => {
     )
   }
 
+  function SetUser() {
+    return (
+      <div className='row justify-content-center p-2 m-1 mt-3'>
+        <div className='row justify-content-start label-set-user mb-1'>
+          Set User
+        </div>
+        <div className='input-group'>
+          <div className='col-12 col-md-6 my-1'>
+            <input type='text' className='form-control' placeholder='Line User Id' />
+          </div>
+          <div className='col-12 col-md-6 my-1'>
+            <input type='text' className='form-control' placeholder='Line Access Token' />
+          </div>
+        </div>
+        <div className='mt-1 mt-md-2 d-grid gap-2'>
+          <button type='button' className='btn btn-outline-primary'>Submit</button>
+        </div>
+        <style jsx>{`
+          .label-set-user {
+            font-size: 30px;
+          }
+          .label-alert-count {
+            font-size: 30px;
+          }
+      `}</style>
+      </div>
+    )
+  }
+
   function CreateAlert() {
     return (
       <div className='row justify-content-center p-2 m-1 mt-3'>
@@ -104,6 +133,7 @@ const AlertIndexPage = () => {
   return (
     <div className='container'>
       {Statistic()}
+      {SetUser()}
       {CreateAlert()}
       {ListAlert()}
     </div>
