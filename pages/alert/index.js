@@ -35,19 +35,27 @@ const AlertIndexPage = () => {
   function SetUser() {
     return (
       <div className='row justify-content-center p-2 m-1 mt-3'>
-        <div className='row justify-content-start label-set-user mb-1'>
-          Set User
-        </div>
-        <div className='input-group'>
-          <div className='col-12 col-md-6 my-1'>
-            <input type='text' className='form-control' placeholder='Line User Id' />
-          </div>
-          <div className='col-12 col-md-6 my-1'>
-            <input type='text' className='form-control' placeholder='Line Access Token' />
+        <div className='m-1'>
+          <div className='label-set-user'>
+            Set User
+            <button className='btn btn-outline-primary ms-3' type='button' data-bs-toggle='collapse' data-bs-target='#collapse-setup-user'
+                    aria-expanded='false' aria-controls='collapseExample'>
+              <i className="fa fa-angle-down" aria-hidden="true" />
+            </button>
           </div>
         </div>
-        <div className='mt-1 mt-md-2 d-grid gap-2'>
-          <button type='button' className='btn btn-outline-primary'>Submit</button>
+        <div className='collapse' id='collapse-setup-user'>
+          <div className='input-group'>
+            <div className='col-12 col-md-6 my-1'>
+              <input type='text' className='form-control' placeholder='Line User Id' />
+            </div>
+            <div className='col-12 col-md-6 my-1'>
+              <input type='text' className='form-control' placeholder='Line Access Token' />
+            </div>
+          </div>
+          <div className='mt-1 mt-md-2 d-grid gap-2'>
+            <button type='button' className='btn btn-outline-primary'>Submit</button>
+          </div>
         </div>
         <style jsx>{`
           .label-set-user {
@@ -64,31 +72,39 @@ const AlertIndexPage = () => {
   function CreateAlert() {
     return (
       <div className='row justify-content-center p-2 m-1 mt-3'>
-        <div className='row justify-content-start label-alert mb-1'>
-          Add Alert
-        </div>
-        <div className='input-group'>
-          <div className='col-12 col-md-4 my-1'>
-            <select className='form-select options-text' >
-              <option selected>Choose Product</option>
-              <option value='1'>Gold</option>
-              <option value='2'>Nasda100</option>
-              <option value='3'>BITCOIN</option>
-            </select>
-          </div>
-          <div className='col-12 col-md-4 my-1'>
-            <select className='form-select options-text' >
-              <option selected>Choose Operation</option>
-              <option value='1'>{'>='}</option>
-              <option value='2'>{'<='}</option>
-            </select>
-          </div>
-          <div className='col-12 col-md-4 my-1'>
-            <input type='text' className='form-control' placeholder='product price' />
+        <div className='m-1'>
+          <div className='label-alert'>
+            Add Alert
+            <button className='btn btn-outline-primary ms-3' type='button' data-bs-toggle='collapse' data-bs-target='#collapse-alert'
+                    aria-expanded='false' aria-controls='collapseExample'>
+              <i className="fa fa-angle-down" aria-hidden="true" />
+            </button>
           </div>
         </div>
-        <div className='mt-1 mt-md-2 d-grid gap-2'>
-          <button type='button' className='btn btn-outline-primary'>Submit</button>
+        <div className='collapse' id='collapse-alert'>
+          <div className='input-group'>
+            <div className='col-12 col-md-4 my-1'>
+              <select className='form-select options-text' >
+                <option selected>Choose Product</option>
+                <option value='1'>Gold</option>
+                <option value='2'>Nasda100</option>
+                <option value='3'>BITCOIN</option>
+              </select>
+            </div>
+            <div className='col-12 col-md-4 my-1'>
+              <select className='form-select options-text' >
+                <option selected>Choose Operation</option>
+                <option value='1'>{'>='}</option>
+                <option value='2'>{'<='}</option>
+              </select>
+            </div>
+            <div className='col-12 col-md-4 my-1'>
+              <input type='text' className='form-control' placeholder='product price' />
+            </div>
+          </div>
+          <div className='mt-1 mt-md-2 d-grid gap-2'>
+            <button type='button' className='btn btn-outline-primary'>Submit</button>
+          </div>
         </div>
         <style jsx>{`
           .options-text {
