@@ -24,7 +24,7 @@ const AlertIndexPage = () => {
   const [alerts, setAlerts] = useState([])
 
   const checkError = useCallback(error => {
-    if (error.response.data.name === 'TOKEN_INVALID_ERROR') {
+    if (!error.response || error.response.data.name === 'TOKEN_INVALID_ERROR') {
       router.push('/')
     }
   }, [])
