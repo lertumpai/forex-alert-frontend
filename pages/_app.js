@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>Memorize version {pkg.version}</title>
+        <title>Forex Alert version {pkg.version}</title>
       </Head>
       <Component {...pageProps} />
     </>
