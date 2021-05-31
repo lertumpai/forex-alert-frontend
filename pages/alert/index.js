@@ -363,7 +363,7 @@ const AlertIndexPage = () => {
         <div className='row justify-content-start label-list mb-1'>
           List Alert
         </div>
-        {alerts.map(GenListAlert)}
+        {alerts.sort((a, b) => a.productName.localeCompare(b.productName)).map(GenListAlert)}
         <style jsx>{`
           .label-list {
             font-size: 30px;
