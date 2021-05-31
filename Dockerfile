@@ -9,14 +9,14 @@ ENV SERVER_URL=$SERVER_URL
 RUN echo $SERVER_URL
 
 # set a directory for the app
-WORKDIR /usr/src/memorize-frontend
+WORKDIR /usr/src/forex-aler-frontend
 
 # copy all the files to the container
-COPY package.json /usr/src/memorize-frontend
+COPY package.json /usr/src/forex-aler-frontend
 
 RUN npm install
 
-COPY . /usr/src/memorize-frontend
+COPY . /usr/src/forex-aler-frontend
 
 RUN npm run build
 
