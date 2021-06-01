@@ -19,6 +19,7 @@ const AlertIndexPage = () => {
   const [condition, setCondition] = useState('')
   const [productId, setProductId] = useState('')
   const [price, setPrice] = useState('')
+  const [updatedPriceTime, setUpdatedPriceTime] = useState('')
 
   // for list alert
   const [alerts, setAlerts] = useState([])
@@ -109,6 +110,22 @@ const AlertIndexPage = () => {
     }
   }
 
+  async function getUpdatedPriceTime() {
+    try {
+      const response = await axios.get(
+        `${SERVER_URL}/products/updated_price_time`
+        , {
+          withCredentials: true,
+          headers: {
+            'Access-Control-Allow-Origin': '*'
+          }
+        })
+      setUpdatedPriceTime(response.data.updatedPriceTime)
+    } catch (e) {
+      checkError(e)
+    }
+  }
+
   async function getProductPrice(productId) {
     try {
       const response = await axios.get(
@@ -132,6 +149,7 @@ const AlertIndexPage = () => {
       getConditions(),
       getProducts(),
       getAlerts(),
+      getUpdatedPriceTime(),
     ])
   }, [])
 
@@ -153,6 +171,9 @@ const AlertIndexPage = () => {
           <div className='row justify-content-center label-alert-count'>
             {count.countAlert}
           </div>
+        </div>
+        <div className='row justify-content-center mt-3'>
+          Updated price at {updatedPriceTime}
         </div>
         <style jsx>{`
           .label-alert {
