@@ -10,7 +10,7 @@ const {
 
 const AlertIndexPage = () => {
   const router = useRouter()
-  const [user, setUser] = useState({ line_access_token: '', line_user_id: '' })
+  const [user, setUser] = useState({ line_access_token: '', line_user_id: '', mobileNo: '' })
   const [count, setCount] = useState({ countAll: 0, countAlert: 0, countNotAlert: 0 })
 
   // for create alert
@@ -187,12 +187,16 @@ const AlertIndexPage = () => {
     )
   }
 
-  function onLineIdChange(e) {
-    setUser(state => ({ ...state, line_user_id: e.target.value }))
-  }
+  // function onLineIdChange(e) {
+  //   setUser(state => ({ ...state, line_user_id: e.target.value }))
+  // }
+  //
+  // function onLineAccessTokenChange(e) {
+  //   setUser(state => ({ ...state, line_access_token: e.target.value }))
+  // }
 
-  function onLineAccessTokenChange(e) {
-    setUser(state => ({ ...state, line_access_token: e.target.value }))
+  function onMobileNoChange(e) {
+    setUser(state => ({ ...state, mobileNo: e.target.value }))
   }
 
   async function onSubmitSetUser() {
@@ -200,8 +204,9 @@ const AlertIndexPage = () => {
       const response = await axios.patch(
         `${SERVER_URL}/users/`,
         {
-          line_access_token: user.line_access_token,
-          line_user_id: user.line_user_id,
+          // line_access_token: user.line_access_token,
+          // line_user_id: user.line_user_id,
+          mobileNo: user.mobileNo,
         }, {
           withCredentials: true,
           headers: {
@@ -229,11 +234,14 @@ const AlertIndexPage = () => {
         </div>
         <div className='collapse' id='collapse-setup-user'>
           <div className='input-group'>
-            <div className='col-12 col-md-6 my-1'>
-              <input type='text' className='form-control' placeholder='Line User Id' value={user.line_user_id} onChange={onLineIdChange} />
-            </div>
-            <div className='col-12 col-md-6 my-1'>
-              <input type='text' className='form-control' placeholder='Line Access Token' value={user.line_access_token} onChange={onLineAccessTokenChange} />
+            {/*<div className='col-12 col-md-6 my-1'>*/}
+            {/*  <input type='text' className='form-control' placeholder='Line User Id' value={user.line_user_id} onChange={onLineIdChange} />*/}
+            {/*</div>*/}
+            {/*<div className='col-12 col-md-6 my-1'>*/}
+            {/*  <input type='text' className='form-control' placeholder='Line Access Token' value={user.line_access_token} onChange={onLineAccessTokenChange} />*/}
+            {/*</div>*/}
+            <div className='col-12 my-1'>
+              <input type='text' className='form-control' placeholder='mobile no' value={user.mobileNo} onChange={onMobileNoChange} />
             </div>
           </div>
           <div className='mt-1 mt-md-2 d-grid gap-2'>
