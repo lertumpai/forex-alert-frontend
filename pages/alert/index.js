@@ -139,7 +139,8 @@ const AlertIndexPage = () => {
             'Access-Control-Allow-Origin': '*'
           }
         })
-      setPrice(response.data.price)
+
+      setPrice(Number(response.data.price).toFixed(3))
     } catch (e) {
       checkError(e)
     }
