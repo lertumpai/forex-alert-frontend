@@ -24,6 +24,9 @@ const AlertIndexPage = () => {
   // for list alert
   const [alerts, setAlerts] = useState([])
 
+  // for sms credit
+  const [smsCredit, setSmsCredit] = useState(0)
+
   const checkError = useCallback(error => {
     if (!error.response || error.response.data.name === 'TOKEN_INVALID_ERROR') {
       router.push('/')
@@ -142,6 +145,22 @@ const AlertIndexPage = () => {
     }
   }
 
+  async function getSmsCredit() {
+    try {
+      const response = await axios.get(
+        `${SERVER_URL}/alerts/sms_credit`
+        , {
+          withCredentials: true,
+          headers: {
+            'Access-Control-Allow-Origin': '*'
+          }
+        })
+      setSmsCredit(response.data.credit)
+    } catch (e) {
+      checkError(e)
+    }
+  }
+
   useEffect(async () => {
     await Promise.all([
       getUser(),
@@ -150,13 +169,17 @@ const AlertIndexPage = () => {
       getProducts(),
       getAlerts(),
       getUpdatedPriceTime(),
+      getSmsCredit(),
     ])
   }, [])
 
   function Statistic() {
     return (
       <div className='row justify-content-center p-2 m-1 mt-3'>
-        <div className='col-6 p-2 border'>
+        <div className='row justify-content-center mb-3'>
+          Updated price at {updatedPriceTime}
+        </div>
+        <div className='col-4 p-2 border'>
           <div className='row justify-content-center label-alert'>
             All Alert
           </div>
@@ -164,7 +187,7 @@ const AlertIndexPage = () => {
             {count.countAll}
           </div>
         </div>
-        <div className='col-6 p-2 border'>
+        <div className='col-4 p-2 border'>
           <div className='row justify-content-center label-alert'>
             Alerted
           </div>
@@ -172,15 +195,20 @@ const AlertIndexPage = () => {
             {count.countAlert}
           </div>
         </div>
-        <div className='row justify-content-center mt-3'>
-          Updated price at {updatedPriceTime}
+        <div className='col-4 p-2 border'>
+          <div className='row justify-content-center label-alert'>
+            Sms
+          </div>
+          <div className='row justify-content-center label-alert-count'>
+            {smsCredit}
+          </div>
         </div>
         <style jsx>{`
           .label-alert {
-            font-size: 30px;
+            font-size: 20px;
           }
           .label-alert-count {
-            font-size: 30px;
+            font-size: 18px;
           }
       `}</style>
       </div>
