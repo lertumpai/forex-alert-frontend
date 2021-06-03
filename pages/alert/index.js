@@ -200,7 +200,7 @@ const AlertIndexPage = () => {
             Sms
           </div>
           <div className='row justify-content-center label-alert-count'>
-            {smsCredit}
+            {smsCredit || 0}
           </div>
         </div>
         <style jsx>{`
