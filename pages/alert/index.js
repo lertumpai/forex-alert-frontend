@@ -27,6 +27,9 @@ const AlertIndexPage = () => {
   // for sms credit
   const [smsCredit, setSmsCredit] = useState(0)
 
+  // for all products price
+  const [productPrices, setProductPrices] = useState({})
+
   const checkError = useCallback(error => {
     if (!error.response || error.response.data.name === 'TOKEN_INVALID_ERROR') {
       router.push('/')
@@ -162,6 +165,22 @@ const AlertIndexPage = () => {
     }
   }
 
+  async function getProductPrices() {
+    try {
+      const response = await axios.get(
+        `${SERVER_URL}/products/prices`
+        , {
+          withCredentials: true,
+          headers: {
+            'Access-Control-Allow-Origin': '*'
+          }
+        })
+      setProductPrices(response.data)
+    } catch (e) {
+      checkError(e)
+    }
+  }
+
   useEffect(async () => {
     await Promise.all([
       getUser(),
@@ -171,15 +190,60 @@ const AlertIndexPage = () => {
       getAlerts(),
       getUpdatedPriceTime(),
       getSmsCredit(),
+      getProductPrices(),
     ])
+    setInterval(() => getProductPrices(), 1000)
   }, [])
+
+  function ProductPrice(product) {
+    const [productNameWithBroker, price] = product
+    const productName = productNameWithBroker.split(':')
+    return(
+      <div key={productNameWithBroker} className='border product-price'>
+        <div className='row justify-content-center mt-2'>
+          {productName[productName.length - 1]}
+        </div>
+        <div className='row justify-content-center mb-2'>
+          {Number(price).toFixed(3)}
+        </div>
+        <style jsx>{`
+          .product-price {
+            font-size: 16px;
+            width: 180px;
+          }
+      `}</style>
+      </div>
+    )
+  }
+
+  function ShowPrices() {
+    return (
+      <div className='row justify-content-center p-2 m-1 mt-3 border'>
+        <div className='row justify-content-center updated-time'>
+          Updated price at {updatedPriceTime}
+        </div>
+        <div className='row flex-row flex-nowrap overflow-auto mt-2 product-prices'>
+          {Object.entries(productPrices).map(ProductPrice)}
+        </div>
+        <style jsx>{`
+          .updated-time {
+            font-size: 20px;
+          }
+          .product-prices {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+          }
+          .product-prices::-webkit-scrollbar {
+            display: none;
+          }
+      `}</style>
+      </div>
+    )
+  }
 
   function Statistic() {
     return (
       <div className='row justify-content-center p-2 m-1 mt-3'>
-        <div className='row justify-content-center mb-3'>
-          Updated price at {updatedPriceTime}
-        </div>
         <div className='col-4 p-2 border'>
           <div className='row justify-content-center label-alert'>
             All Alert
@@ -433,6 +497,8 @@ const AlertIndexPage = () => {
 
   return (
     <div className='container'>
+      {ShowPrices()}
+      <hr/>
       {Statistic()}
       {SetUser()}
       {CreateAlert()}
