@@ -230,7 +230,7 @@ const AlertIndexPage = () => {
         </div>
         <style jsx>{`
           .updated-time {
-            font-size: 20px;
+            font-size: 16px;
           }
           .product-prices {
             -ms-overflow-style: none;
