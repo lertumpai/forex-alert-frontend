@@ -490,7 +490,6 @@ const AlertIndexPage = () => {
         </div>
         <div className='overflow-auto container-list-alert'>
           {alerts.sort((a, b) => a.productName.localeCompare(b.productName)).map(GenListAlert)}
-          {alerts.sort((a, b) => a.productName.localeCompare(b.productName)).map(GenListAlert)}
         </div>
         <style jsx>{`
           .label-list {
