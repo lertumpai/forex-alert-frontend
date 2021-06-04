@@ -432,7 +432,7 @@ const AlertIndexPage = () => {
           </div>
           <div className='mt-1 mt-md-2 d-grid gap-2'>
             {
-              user.line_user_id && user.line_access_token
+              user.mobileNo
                 ? <button type='button' className='btn btn-outline-primary' onClick={onSubmitAlert} >Submit</button>
                 : <button type='button' className='btn btn-outline-primary' onClick={onSubmitAlert} disabled>Submit</button>
             }
