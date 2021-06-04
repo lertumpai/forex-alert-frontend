@@ -488,10 +488,21 @@ const AlertIndexPage = () => {
         <div className='row justify-content-start label-list mb-1'>
           List Alert
         </div>
-        {alerts.sort((a, b) => a.productName.localeCompare(b.productName)).map(GenListAlert)}
+        <div className='overflow-auto container-list-alert'>
+          {alerts.sort((a, b) => a.productName.localeCompare(b.productName)).map(GenListAlert)}
+          {alerts.sort((a, b) => a.productName.localeCompare(b.productName)).map(GenListAlert)}
+        </div>
         <style jsx>{`
           .label-list {
             font-size: 30px;
+          }
+          .container-list-alert {
+            height: 500px;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+          }
+          .container-list-alert::-webkit-scrollbar {
+            display: none;
           }
       `}</style>
       </div>
