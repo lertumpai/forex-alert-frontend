@@ -18,6 +18,7 @@ const AlertIndexPage = () => {
   const [products, setProducts] = useState([])
   const [condition, setCondition] = useState('')
   const [productId, setProductId] = useState('')
+  const [note, setNote] = useState('')
   const [price, setPrice] = useState('')
   const [updatedPriceTime, setUpdatedPriceTime] = useState('')
 
@@ -377,6 +378,10 @@ const AlertIndexPage = () => {
     setPrice(e.target.value)
   }
 
+  function onNoteChange(e) {
+    setNote(e.target.value)
+  }
+
   async function onSubmitAlert() {
     try {
       if (!price || !condition || !productId) {
@@ -387,6 +392,7 @@ const AlertIndexPage = () => {
         {
           price,
           condition,
+          note,
           productId,
         }, {
           withCredentials: true,
@@ -428,6 +434,9 @@ const AlertIndexPage = () => {
             </div>
             <div className='col-12 col-md-4 my-1'>
               <input type='text' className='form-control' placeholder='product price' onChange={onPriceChange} value={price} />
+            </div>
+            <div className='my-1' style={{ width: '100%' }}>
+              <textarea className='form-control' style={{ resize: 'none' }} placeholder='Note' onChange={onNoteChange} value={note} rows='3' />
             </div>
           </div>
           <div className='mt-1 mt-md-2 d-grid gap-2'>
