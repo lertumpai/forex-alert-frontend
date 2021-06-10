@@ -199,8 +199,8 @@ const AlertIndexPage = () => {
     setInterval(() => Promise.all([
       getProductPrices(),
       getUpdatedPriceTime(),
-    ]), 3000)
-  })
+    ]), 2000)
+  }, [])
 
   function ProductPrice(product) {
     const [productNameWithBroker, price] = product
