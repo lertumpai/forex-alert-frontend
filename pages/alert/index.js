@@ -193,14 +193,14 @@ const AlertIndexPage = () => {
       getSmsCredit(),
       getProductPrices(),
     ])
-    setInterval(() => {
-      console.log('Updated')
-      return Promise.all([
-        getProductPrices(),
-        getUpdatedPriceTime(),
-      ])
-    }, 1000)
   }, [])
+
+  useEffect(() => {
+    setInterval(() => Promise.all([
+      getProductPrices(),
+      getUpdatedPriceTime(),
+    ]), 3000)
+  })
 
   function ProductPrice(product) {
     const [productNameWithBroker, price] = product
