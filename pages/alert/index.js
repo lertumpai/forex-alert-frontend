@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import getConfig from 'next/config'
 import axios from 'axios'
+import _ from 'lodash'
 
 const { publicRuntimeConfig } = getConfig()
 const {
@@ -29,7 +30,7 @@ const AlertIndexPage = () => {
   const [smsCredit, setSmsCredit] = useState(0)
 
   // for all products price
-  const [productPrices, setProductPrices] = useState({})
+  const [productPrices, setProductPrices] = useState([])
 
   const checkError = useCallback(error => {
     if (!error.response || error.response.data.name === 'TOKEN_INVALID_ERROR') {
@@ -203,7 +204,7 @@ const AlertIndexPage = () => {
   }, [])
 
   function ProductPrice(product) {
-    const [productNameWithBroker, price] = product
+    const { product: productNameWithBroker, price } = product[1]
     const productName = productNameWithBroker.split(':')
     return(
       <div key={productNameWithBroker} className='border product-price'>
@@ -501,7 +502,7 @@ const AlertIndexPage = () => {
           List Alert
         </div>
         <div className='overflow-auto container-list-alert'>
-          {alerts.sort((a, b) => a.productName.localeCompare(b.productName)).map(GenListAlert)}
+          {_.sortBy(alerts, ['productName', 'price']).map(GenListAlert)}
         </div>
         <style jsx>{`
           .label-list {
