@@ -484,7 +484,7 @@ const AlertIndexPage = () => {
   function GenListAlert(data) {
     return (
       <div key={data.id} className='input-group my-1'>
-        <h3 className='alert-container border border-primary form-control'>{`${data.productName} ${data.condition} ${data.price}`}</h3>
+        <h3 className='alert-container border border-primary form-control'>{`${data.productName} ${data.condition} ${data.price} ${data.note ? `(${data.note})` : ''}`}</h3>
         <button className='btn btn-outline-danger alert-container' type='button' onClick={onDeleteAlert(data.id)}>x</button>
         <style jsx>{`
           .alert-container {
