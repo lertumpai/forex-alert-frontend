@@ -483,15 +483,34 @@ const AlertIndexPage = () => {
 
   function GenListAlert(data) {
     return (
-      <div key={data.id} className='input-group my-1'>
-        <h3 className='alert-container border border-primary form-control'>{`${data.productName} ${data.condition} ${data.price} ${data.note ? `(${data.note})` : ''}`}</h3>
-        <button className='btn btn-outline-danger alert-container' type='button' onClick={onDeleteAlert(data.id)}>x</button>
-        <style jsx>{`
-          .alert-container {
-            height: 80%;
+        <>
+          <div key={data.id + '1'} className='input-group'>
+            <h3 className='alert-container border border-primary form-control'>{`${data.productName} ${data.condition} ${data.price}`}</h3>
+            <button className='btn btn-outline-danger alert-container' type='button' onClick={onDeleteAlert(data.id)}>x</button>
+            <style jsx>
+              {`
+                .alert-container {
+                  height: 80%;
+                }
+              `}
+            </style>
+          </div>
+          {
+            data.note
+                ? <div key={data.id + '2'}>
+                    <h3 className='alert-container border border-primary form-control alert-message'>{`Note: ${data.note}`}</h3>
+                  <style jsx>
+                    {`
+                      .alert-message {
+                        word-wrap: break-word;
+                        margin-top: -9px;
+                      }
+                  ` }
+                  </style>
+                  </div>
+                : ''
           }
-      `}</style>
-      </div>
+        </>
     )
   }
 
